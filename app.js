@@ -6,24 +6,23 @@ var CANVAS,
     canW,
     ctx,
     myGame;
-var myColors = new Colors();
 
-var defaultSimSpeed = 100;
+var defaultSimSpeed = 72;
 
-function Colors() {
-  this.black = 'rgba(0, 0, 0, 1)';
-  this.darkGrey = 'rgba(50, 50, 50, 1)';
-  this.lightGreyTrans = 'rgba(50, 50, 50, 0.3)';
-  this.greyReset = 'rgb(211,211,211)';
-  this.lighterGreyReset = 'rgb(240,240,240)';
-  this.lightGreyBox = 'rgba(220, 220, 220, 1)';
-  this.white = 'rgba(250, 250, 250, 1)';
-  this.red = 'rgba(230, 0, 0, 1)';
-  this.cherry = 'rgba(242,47,8,1)';
-  this.green = 'rgba(0, 230, 0, 1)';
-  this.blue = 'rgba(0, 0, 230, 1)';
-  this.electricBlue = 'rgba(20, 30, 230, 1)';
-}
+var myColors  = {
+  black: 'rgba(0, 0, 0, 1)',
+  darkGrey: 'rgba(50, 50, 50, 1)',
+  lightGreyTrans: 'rgba(50, 50, 50, 0.3)',
+  greyReset: 'rgb(211,211,211)',
+  lighterGreyReset: 'rgb(240,240,240)',
+  lightGreyBox: 'rgba(220, 220, 220, 1)',
+  white: 'rgba(250, 250, 250, 1)',
+  red: 'rgba(230, 0, 0, 1)',
+  cherry: 'rgba(242,47,8,1)',
+  green: 'rgba(0, 230, 0, 1)',
+  blue: 'rgba(0, 0, 230, 1)',
+  electricBlue: 'rgba(20, 30, 230, 1)'
+};
 
 var State = {
   myReq: undefined,
@@ -144,42 +143,42 @@ function keyDown(event) {
     switch (keyWhich) {
         case 37: // Left arrow key
           State.keysDown.left = true;
-          document.getElementById("key-left").style.backgroundColor = "pink";
+          // document.getElementById("key-left").style.backgroundColor = "pink";
           if (myGame.paused === false) { State.lastkey = 'left'; }
           break;
         case 39: //Right arrow key
           State.keysDown.right = true;
-          document.getElementById("key-right").style.backgroundColor = "pink";
+          // document.getElementById("key-right").style.backgroundColor = "pink";
           if (myGame.paused === false) { State.lastkey = 'right'; }
           break;
         case 38: // Up arrow key
           State.keysDown.up = true;
-          document.getElementById("key-up").style.backgroundColor = "pink";
+          // document.getElementById("key-up").style.backgroundColor = "pink";
           if (myGame.paused === false) { State.lastkey = 'up'; }
           break;
         case 40: //Down arrow key
           State.keysDown.down = true;
-          document.getElementById("key-down").style.backgroundColor = "pink";
+          // document.getElementById("key-down").style.backgroundColor = "pink";
           if (myGame.paused === false) { State.lastkey = 'down'; }
           break;
         case 65: // A key
           State.keysDown.a = true;
-          document.getElementById("key-A").style.backgroundColor = "pink";
+          // document.getElementById("key-A").style.backgroundColor = "pink";
           if (myGame.paused === false) { State.lastkey = 'left'; }
           break;
         case 68: // D key
           State.keysDown.d = true;
-          document.getElementById("key-D").style.backgroundColor = "pink";
+          // document.getElementById("key-D").style.backgroundColor = "pink";
           if (myGame.paused === false) { State.lastkey = 'right'; }
           break;
         case 87: // W key
           State.keysDown.w = true;
-          document.getElementById("key-W").style.backgroundColor = "pink";
+          // document.getElementById("key-W").style.backgroundColor = "pink";
           if (myGame.paused === false) { State.lastkey = 'up'; }
           break;
         case 83: // S key
           State.keysDown.s = true;
-          document.getElementById("key-S").style.backgroundColor = "pink";
+          // document.getElementById("key-S").style.backgroundColor = "pink";
           if (myGame.paused === false) { State.lastkey = 'down'; }
           break;
         case 90: // Z key
@@ -216,42 +215,42 @@ function keyUp(event) {
   switch (code) {
       case 37: // Left key
         State.keysDown.left = false;
-        document.getElementById("key-left").style.backgroundColor = "lightblue";
+        // document.getElementById("key-left").style.backgroundColor = "lightblue";
         if (myGame.paused === false) { /*something*/ }
         break;
       case 39: //Right key
         State.keysDown.right = false;
-        document.getElementById("key-right").style.backgroundColor = "lightblue";
+        // document.getElementById("key-right").style.backgroundColor = "lightblue";
         if (myGame.paused === false) { /*something*/ }
         break;
       case 38: // Up key
         State.keysDown.up = false;
-        document.getElementById("key-up").style.backgroundColor = "lightblue";
+        // document.getElementById("key-up").style.backgroundColor = "lightblue";
         if (myGame.paused === false) { /*something*/ }
         break;
       case 40: //Down key
         State.keysDown.down = false;
-        document.getElementById("key-down").style.backgroundColor = "lightblue";
+        // document.getElementById("key-down").style.backgroundColor = "lightblue";
         if (myGame.paused === false) { /*something*/ }
         break;
       case 65: // A key
         State.keysDown.a = false;
-        document.getElementById("key-A").style.backgroundColor = "lightblue";
+        // document.getElementById("key-A").style.backgroundColor = "lightblue";
         if (myGame.paused === false) { /*something*/ }
         break;
       case 68: // D key
         State.keysDown.d = false;
-        document.getElementById("key-D").style.backgroundColor = "lightblue";
+        // document.getElementById("key-D").style.backgroundColor = "lightblue";
         if (myGame.paused === false) { /*something*/ }
         break;
       case 87: // W key
         State.keysDown.w = false;
-        document.getElementById("key-W").style.backgroundColor = "lightblue";
+        // document.getElementById("key-W").style.backgroundColor = "lightblue";
         if (myGame.paused === false) { /*something*/ }
         break;
       case 83: // S key
         State.keysDown.s = false;
-        document.getElementById("key-S").style.backgroundColor = "lightblue";
+        // document.getElementById("key-S").style.backgroundColor = "lightblue";
         if (myGame.paused === false) { /*something*/ }
         break;
       case 90: // Z key
@@ -318,7 +317,7 @@ function gameLoop(timestamp) {
 
   if ( (State.loopRunning === true) && (State.gameStarted === true) ) { myGame.update(); }
 
-  clearCanvas();
+  clearCanvas(ctx);
   if (State.gameStarted === false) {
     myGame.drawBG();
   } else {
@@ -372,10 +371,7 @@ $(document).ready(function() {
       myGame.mode = 'sim';
       console.log('mode now sim');
       State.gameStarted = true;
-      $('#mode-current-status')[0].innerText = 'simulate';
-      let v = $('#speed-slider').val();
-      $('#speed-input').prop("value", v);
-      myGame.updateDuration = (1000/v);
+      myGame.updateDuration = (1000/defaultSimSpeed);
       myGame.lastUpdate = performance.now();
     } else {
       console.log('must reset before starting again');
@@ -388,8 +384,8 @@ $(document).ready(function() {
     State.loopRunning = true;
     State.gameStarted = false;
     myGame.mode = 'draw';
+    console.log('game mode = draw');
     $('#pause-btn')[0].innerText = 'PAUSE';
-    $('#mode-current-status')[0].innerText = 'draw';
   });
 
   $('#pause-btn').click(function() {
@@ -403,28 +399,5 @@ $(document).ready(function() {
     }
   });
 
-  //INPUT
-  $('#speed-slider').mousedown(function(e1) {
-    leftMouseDown = true;
-  }).mouseup(function(e2) {
-    leftMouseDown = false;
-  });
-  $('#speed-input').on('change', function(e) {
-    let v = this.value;
-    $('#speed-slider').prop("value", v);
-    if (myGame.mode === 'sim') {
-      myGame.updateDuration = (1000/v);
-    }
-  });
-
-  $('#speed-slider').mousemove(function(e) {
-    if (leftMouseDown === true) {
-      let v = this.value;
-      $('#speed-input').prop("value", v);
-      if (myGame.mode === 'sim') {
-        myGame.updateDuration = (1000/v);
-      }
-    }
-  });
 
 });
