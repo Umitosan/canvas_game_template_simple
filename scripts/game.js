@@ -1,12 +1,11 @@
 /*jshint esversion: 6 */
 
 
-function Game(updateDur) {
-  this.timeGap = 0;
-  this.lastUpdate = 0;
+function Game() {
+  this.timeGap = 0;  // gap in ms between updates
+  this.lastUpdate = 0;  // ms time of last update
   this.lastDirKeyX = undefined;
   this.lastDirKeyY = undefined;
-  this.updateDuration = updateDur; // milliseconds duration between update()
   this.paused = false;
   this.bg = new Image();
   this.boxy = undefined;
@@ -21,12 +20,9 @@ function Game(updateDur) {
 
   this.pauseIt = function() {
     myGame.paused = true;
-    // this.pausedTxt.show = true;
   };
   this.unpauseIt = function() {
     myGame.paused = false;
-    // this.pausedTxt.show = false;
-    // this prevents pac from updating many times after UNpausing
     this.lastUpdate = performance.now();
     this.timeGap = 0;
   };
@@ -41,33 +37,15 @@ function Game(updateDur) {
   }; // end draw
 
   this.update = function() {
-      if (this.paused === false) { // performance based update: myGame.update() runs every myGame.updateDuration milliseconds
-            this.timeGap = performance.now() - this.lastUpdate;
-
-            if ( this.timeGap >= this.updateDuration ) { // this update is restricted to updateDuration
-              let timesToUpdate = this.timeGap / this.updateDuration;
-              for (let i=1; i < timesToUpdate; i++) { // update children objects
-                // if (timesToUpdate > 2) {
-                //   console.log('timesToUpdate = ', timesToUpdate);
-                // }
-                // general update area
-                this.boxy.update();
-              }
-              this.lastUpdate = performance.now();
-            } // end if
-
-            // if (this.mode === "draw") { // run this every update cycle regardless of timing
-            //   // general draw area
-            // } else {
-            //   // mode is none
-            // }
-
-      } else if (this.paused === true) {
-        // PAUSED! do nothin
-      } else {
-        console.log('game pause issue');
-      }
-
+    if (this.paused === false) {
+      this.timeGap = performance.now() - this.lastUpdate;
+      this.boxy.update();
+      this.lastUpdate = performance.now();
+    } else if (this.paused === true) {
+      // PAUSED! do nothin
+    } else {
+      console.log('game pause issue');
+    }
   }; // end update
 
 } // end myGame
